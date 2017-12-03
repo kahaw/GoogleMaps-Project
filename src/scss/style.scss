@@ -1,8 +1,103 @@
+*{
+  font-family: 'Roboto';
+  box-sizing: border-box;
+}
 html, body {
        height: 100%;
        margin: 0;
        padding: 0;
      }
 #map {
- height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 80vw;
 }
+#sidebar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 20vw;
+    background: #ddd;
+}
+header{
+  position: relative;
+  top: 0;
+  left: 0;
+}
+h1{
+  font-size: 1em;
+  padding: 20px;
+  height: 50px;
+  text-align: 10px;
+  color: #333;
+  border-bottom: 1px solid #ccc
+}
+.googlemaps{
+  height: 25px;
+  position: absolute;
+  top: 14px;
+  left: 189px;
+}
+
+.form-wrapper{
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  display: flex;
+  flex: 0 0 100%;
+}
+.field-section{
+  display: flex;
+  flex: 0 0 50%;
+}
+span{
+  font-size: 0.7em;
+  color: #aaa;
+}
+
+//
+//   div{background: #f0f0f0
+//     border: 1px solid #ddd
+//     border-radius: 3px
+//     margin: 0 0 10px
+//     padding: 3px
+//     display: flex
+//
+//   label{    display: inline-flex
+//     padding: 8px 10px
+//     line-height: 32px
+//     font-family: Roboto
+//     font-size: 18px
+//     vertical-align: bottom}
+//
+//   input[type=text],
+//   input[type=number]{    display: inline-flex
+//     width: 120px
+//     padding: 8px 10px
+//     border: 1px solid #ddd
+//     border-radius: 3px
+//     margin: 5px 0
+//     font-family: Roboto
+//     font-size: 18px
+//     font-weight: 500
+//     vertical-align: bottom}
+//
+//   button{    display: flex
+//     background: #42afe3
+//     color: #fff
+//     cursor: pointer
+//     padding: 10px 22px
+//     border-radius: 3px
+//     text-transform: uppercase
+//     letter-spacing: 2px
+//     font-weight: 600
+//     border: 3px solid #42afe3
+//     font-size: 14px
+//     margin: 0
+//     height: auto}
+//
+//     &:hover{  background: #fff
+//       color: #42afe3
+//       border: 3px solid #42afe3}
