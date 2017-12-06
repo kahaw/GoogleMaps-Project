@@ -70,7 +70,9 @@ class App extends React.Component {
     if (this._zoom.value.length > 0)
       this.setState({ zoom: parseInt(this._zoom.value) });
   }
-
+  // _handleFlip=()=>{
+  //   this.setState({ lat: parseFloat(this._lng.value), lng: parseFloat(this._lat.value)});
+  // }
   render() {
     return (
       <div>
@@ -97,8 +99,8 @@ class App extends React.Component {
               ref={i => this._zoom = i} />
           </div>
           <div id="arrow">
-            <a href="#" id="flip-direction" onClick={this.handleFlip} title="Flip origin and destination"><img src='http://freevector.co/wp-content/uploads/2011/04/87434-double-arrow-200x200.png' id="arrow"></img></a>
-          </div>
+           <a href="#" id="arrow" onClick={this._handleFlip} title="Flip origin and destination"><img src='http://freevector.co/wp-content/uploads/2011/04/87434-double-arrow-200x200.png' id="arrow"></img></a>
+         </div>
           <button onClick={this._handleFormSubmit}>Submit</button>
         </form>
         <GoogleMaps
