@@ -10076,6 +10076,10 @@ var _reactDom = __webpack_require__(100);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _mapControl = __webpack_require__(191);
+
+var _mapControl2 = _interopRequireDefault(_mapControl);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10092,28 +10096,14 @@ var App = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.handleChange = function (e) {
-      _this.setState({ travelMode: e.target.value });
-    };
-
-    _this.handleFlip = function () {
-      _this.setState({ from: _this.state.to, to: _this.state.from });
-    };
-
-    _this.startChange = function (e) {
-      _this.setState({ from: e.target.value });
-    };
-
-    _this.endChange = function (e) {
-      _this.setState({ to: e.target.value });
-    };
-
     _this.state = {
-      map: _this.props.map,
-      travelMode: 'walking',
-      from: '',
-      to: ''
+      map: _this.props.map
+    };
 
+    _this.props = {
+      travelMode: 'walking',
+      from: 'Katowice',
+      to: 'Sosnowiec'
     };
     return _this;
   }
@@ -10121,62 +10111,14 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'render',
     value: function render() {
-      console.log(this.state.travelMode);
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement('div', { id: 'map' }),
         _react2.default.createElement(
           'div',
-          { id: 'sidebar' },
-          _react2.default.createElement(
-            'header',
-            null,
-            _react2.default.createElement(
-              'h1',
-              null,
-              'GoogleMaps in ReactJ'
-            ),
-            _react2.default.createElement('img', { className: 'googlemaps', src: 'https://vignette.wikia.nocookie.net/logopedia/images/e/e1/Googlemapslogo2014.png/revision/latest?cb=20150309221525' })
-          ),
-          _react2.default.createElement(
-            'form',
-            { className: 'form-wrapper' },
-            _react2.default.createElement(
-              'div',
-              { className: 'field-section' },
-              _react2.default.createElement(
-                'select',
-                { onChange: this.handleChange, value: this.state.travelMode },
-                _react2.default.createElement(
-                  'option',
-                  { value: 'walking' },
-                  'Walking'
-                ),
-                _react2.default.createElement(
-                  'option',
-                  { value: 'by car' },
-                  'Car'
-                ),
-                _react2.default.createElement(
-                  'option',
-                  { value: 'by bicycle' },
-                  'Bicycling'
-                )
-              ),
-              _react2.default.createElement('input', { type: 'text', id: 'direction-start', placeholder: 'From', onChange: this.startChange, required: 'true', value: this.state.from }),
-              _react2.default.createElement('input', { type: 'text', id: 'direction-end', placeholder: 'To', onChange: this.endChange, required: 'true', value: this.state.to })
-            ),
-            _react2.default.createElement(
-              'div',
-              { id: 'arrow' },
-              _react2.default.createElement(
-                'a',
-                { href: '#', id: 'flip-direction', onClick: this.handleFlip, title: 'Flip origin and destination' },
-                _react2.default.createElement('img', { src: 'http://freevector.co/wp-content/uploads/2011/04/87434-double-arrow-200x200.png', id: 'arrow' })
-              )
-            )
-          )
+          null,
+          _react2.default.createElement(_mapControl2.default, null)
         )
       );
     }
@@ -22667,6 +22609,252 @@ module.exports = ReactDOMInvalidARIAHook;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(84);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(100);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _destinationField = __webpack_require__(192);
+
+var _destinationField2 = _interopRequireDefault(_destinationField);
+
+var _directionFlip = __webpack_require__(193);
+
+var _directionFlip2 = _interopRequireDefault(_directionFlip);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MapControls = function (_React$Component) {
+    _inherits(MapControls, _React$Component);
+
+    function MapControls(props) {
+        _classCallCheck(this, MapControls);
+
+        var _this = _possibleConstructorReturn(this, (MapControls.__proto__ || Object.getPrototypeOf(MapControls)).call(this, props));
+
+        _this.handleChange = function (e) {
+            _this.setState({ travelMode: e.target.value });
+            console.log;
+        };
+
+        return _this;
+    }
+
+    _createClass(MapControls, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'sidebar' },
+                _react2.default.createElement(
+                    'header',
+                    null,
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'GoogleMaps in ReactJ'
+                    ),
+                    _react2.default.createElement('img', { className: 'googlemaps', src: 'https://vignette.wikia.nocookie.net/logopedia/images/e/e1/Googlemapslogo2014.png/revision/latest?cb=20150309221525' })
+                ),
+                _react2.default.createElement(
+                    'form',
+                    { className: 'form-wrapper' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'field-section' },
+                        _react2.default.createElement(
+                            'select',
+                            { onChange: this.handleChange },
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'walking' },
+                                'Walking'
+                            ),
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'by_car' },
+                                'Car'
+                            ),
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'by_bicycle' },
+                                'Bicycling'
+                            )
+                        ),
+                        _react2.default.createElement(_destinationField2.default, null)
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { id: 'arrow' },
+                        _react2.default.createElement(_directionFlip2.default, null)
+                    )
+                )
+            );
+        }
+    }]);
+
+    return MapControls;
+}(_react2.default.Component);
+
+exports.default = MapControls;
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(84);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(100);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DestinationField = function (_React$Component) {
+    _inherits(DestinationField, _React$Component);
+
+    function DestinationField(props) {
+        _classCallCheck(this, DestinationField);
+
+        var _this = _possibleConstructorReturn(this, (DestinationField.__proto__ || Object.getPrototypeOf(DestinationField)).call(this, props));
+
+        _this.startChange = function (e) {
+            _this.setState({ from: e.target.value });
+        };
+
+        _this.endChange = function (e) {
+            _this.setState({ to: e.target.value });
+        };
+
+        console.log(_this.props);
+        return _this;
+    }
+
+    _createClass(DestinationField, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('input', { type: 'text', id: 'direction-start', placeholder: this.props.from, required: 'true', onChange: this.startChange, value: this.props.from }),
+                _react2.default.createElement('input', { type: 'text', id: 'direction-start', placeholder: 'To', required: 'true', onChange: this.endChange, value: this.props.to })
+            );
+        }
+    }]);
+
+    return DestinationField;
+}(_react2.default.Component);
+
+exports.default = DestinationField;
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(84);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(100);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DestinationFlip = function (_React$Component) {
+    _inherits(DestinationFlip, _React$Component);
+
+    function DestinationFlip(props) {
+        _classCallCheck(this, DestinationFlip);
+
+        var _this = _possibleConstructorReturn(this, (DestinationFlip.__proto__ || Object.getPrototypeOf(DestinationFlip)).call(this, props));
+
+        _this.handleFlip = function () {
+            _this.setState({
+                from: _this.props.to,
+                to: _this.props.from });
+        };
+
+        return _this;
+    }
+
+    _createClass(DestinationFlip, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'a',
+                { href: '#',
+                    id: 'flip-direction',
+                    onClick: this.handleFlip,
+                    title: 'Flip origin and destination' },
+                _react2.default.createElement('img', { src: 'http://freevector.co/wp-content/uploads/2011/04/87434-double-arrow-200x200.png', id: 'arrow' })
+            );
+        }
+    }]);
+
+    return DestinationFlip;
+}(_react2.default.Component);
+
+exports.default = DestinationFlip;
 
 /***/ })
 /******/ ]);
