@@ -6,16 +6,29 @@ class App extends React.Component {
     super(props);
     this.state={
       map:this.props.map,
-      value:''
+      travelMode:'walking',
+      from:'',
+      to:''
+
     }
   }
 
   handleChange=(e)=>{
-    this.setState({selected:e.target.value})
+    this.setState({travelMode:e.target.value})
+  }
+  handleFlip=()=>{
+    this.setState({from:this.state.to,to:this.state.from})
+  }
+  startChange=(e)=>{
+    this.setState({from:e.target.value})
+  }
+  endChange=(e)=>{
+    this.setState({to:e.target.value})
   }
 
+
   render(){
-    console.log(this.state.map);
+    console.log(this.state.travelMode);
     return <div>
         <div id="map"></div>
         <div id="sidebar">
@@ -25,20 +38,24 @@ class App extends React.Component {
           </header>
           <form className='form-wrapper'>
             <div className="field-section">
-              <label>
-                <select onChange={this.handleChange} value={this.state.selected}>
+                <select onChange={this.handleChange} value={this.state.travelMode}>
                   <option value="walking">Walking</option>
                   <option value="by car">Car</option>
                   <option value="by bicycle">Bicycling</option>
                 </select>
-                <span>from</span>
-              </label>
+              <input type="text" id="direction-start" placeholder="From" onChange={this.startChange} required="true" value={this.state.from}></input>
+              <input type="text" id="direction-end" placeholder="To" onChange={this.endChange} required="true" value={this.state.to}></input>
+            </div>
+            <div id="arrow">
+            <a href="#" id="flip-direction" onClick={this.handleFlip} title="Flip origin and destination"><img src='http://freevector.co/wp-content/uploads/2011/04/87434-double-arrow-200x200.png' id="arrow"></img></a>
             </div>
           </form>
+
         </div>
       </div>
   }
 }
+
 document.addEventListener("DOMContentLoaded",function(){
   ReactDOM.render(
     <App map={map}/>,

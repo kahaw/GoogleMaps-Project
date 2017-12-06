@@ -1,6 +1,7 @@
 * {
   font-family: 'Roboto';
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-size: 1em; }
 
 html, body {
   height: 100%;
@@ -43,14 +44,37 @@ h1 {
 
 .form-wrapper {
   background: #f0f0f0;
-  border: 1px solid #ddd;
   display: flex;
   flex: 0 0 100%; }
 
 .field-section {
   display: flex;
-  flex: 0 0 50%; }
+  flex: 0 0 80%;
+  flex-wrap: wrap; }
 
-span {
-  font-size: 0.7em;
+input {
+  width: 100%;
+  margin: 10px 0;
   color: #aaa; }
+
+#arrow {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  flex: 0 0 20%;
+  margin: auto; }
+
+button {
+  display: flex;
+  background: #42afe3;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 22px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  border: 3px solid #42afe3;
+  font-size: 14px;
+  margin: 0;
+  height: auto; }
