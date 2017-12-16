@@ -18,7 +18,6 @@ export default class GoogleMaps extends React.Component {
       nextProps.zoom
     );
 
-    console.log(nextProps.lat);
   }
 
   componentDidMount() {
@@ -30,8 +29,6 @@ export default class GoogleMaps extends React.Component {
       center: { lat, lng },
       zoom
     };
-    console.log(mapOptions);
-
     this.map.setOptions(mapOptions);
   }
 

@@ -12,7 +12,8 @@ class App extends React.Component {
       lat: 50.2649,
       lng: 19.023,
       zoom: 15,
-      cities:'Katowice'
+      cities:'Złote Łany',
+      direction:'null'
     }
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
@@ -28,15 +29,13 @@ class App extends React.Component {
     if (this._zoom.value.length > 0)
       this.setState({ zoom: parseInt(this._zoom.value) });
     var geocoder = new google.maps.Geocoder;
-    var infowindow = new google.maps.InfoWindow;
     this.geocodeLatLng(geocoder, parseInt(this._lng.value), parseInt(this._lat.value));
   }
   geocodeLatLng=(geocoder, lng, lat)=>{
     var latlng = {lat, lng};
     geocoder.geocode({'location': latlng}, (results, status) =>{
           if (status === 'OK') {
-              var city=results[0].address_components[2].long_name;
-              console.log(city);
+              var city=results[0].formatted_address;
               if (city.length!=0) {
                 this.setState({cities:city},()=>this._city.value=this.state.cities)
               }
@@ -52,7 +51,6 @@ class App extends React.Component {
     let tmp = this._lng.value;
     this._lng.value = this._lat.value;
     this._lat.value = tmp;
-    console.log(this._lat.value,this._lng.value);
   }
 
   render() {
@@ -81,15 +79,22 @@ class App extends React.Component {
                       name="zoom"
                       defaultValue={this.state.zoom}
                       ref={i => this._zoom = i} />
+                    <label>City</label>
                     <input type="text"
                     defaultValue={this.state.cities}
                     ref={i=>this._city=i}/>
+                    <label>Enter the city you would like to go to:</label>
+                    <input type="textbox"
+                    name="direction"
+                    defaulValue={this.state.direction}
+                    ref={i=>this._direction=i} />
                   </div>
                   <div id="arrow">
                       <a href="#" id="arrow" onClick={this.handleFlip} title="Flip origin and destination"><img src='http://freevector.co/wp-content/uploads/2011/04/87434-double-arrow-200x200.png' id="arrow"></img></a>
                   </div>
               </div>
           </div>
+
           <button onClick={this._handleFormSubmit}>Submit</button>
         </form>
         <GoogleMaps

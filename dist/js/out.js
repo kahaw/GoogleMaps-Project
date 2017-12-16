@@ -10122,8 +10122,7 @@ var App = function (_React$Component) {
       var latlng = { lat: lat, lng: lng };
       geocoder.geocode({ 'location': latlng }, function (results, status) {
         if (status === 'OK') {
-          var city = results[0].address_components[2].long_name;
-          console.log(city);
+          var city = results[0].formatted_address;
           if (city.length != 0) {
             _this.setState({ cities: city }, function () {
               return _this._city.value = _this.state.cities;
@@ -10141,14 +10140,14 @@ var App = function (_React$Component) {
       var tmp = _this._lng.value;
       _this._lng.value = _this._lat.value;
       _this._lat.value = tmp;
-      console.log(_this._lat.value, _this._lng.value);
     };
 
     _this.state = {
       lat: 50.2649,
       lng: 19.023,
       zoom: 15,
-      cities: 'Katowice'
+      cities: 'Złote Łany',
+      direction: 'null'
     };
     _this._handleFormSubmit = _this._handleFormSubmit.bind(_this);
     return _this;
@@ -10164,7 +10163,6 @@ var App = function (_React$Component) {
       if (this._lng.value.length > 0) this.setState({ lng: parseFloat(this._lng.value) });
       if (this._zoom.value.length > 0) this.setState({ zoom: parseInt(this._zoom.value) });
       var geocoder = new google.maps.Geocoder();
-      var infowindow = new google.maps.InfoWindow();
       this.geocodeLatLng(geocoder, parseInt(this._lng.value), parseInt(this._lat.value));
     }
   }, {
@@ -10230,10 +10228,26 @@ var App = function (_React$Component) {
                   ref: function ref(i) {
                     return _this2._zoom = i;
                   } }),
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'City'
+                ),
                 _react2.default.createElement('input', { type: 'text',
                   defaultValue: this.state.cities,
                   ref: function ref(i) {
                     return _this2._city = i;
+                  } }),
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Enter the city you would like to go to:'
+                ),
+                _react2.default.createElement('input', { type: 'textbox',
+                  name: 'direction',
+                  defaulValue: this.state.direction,
+                  ref: function ref(i) {
+                    return _this2._direction = i;
                   } })
               ),
               _react2.default.createElement(
@@ -22766,8 +22780,6 @@ var GoogleMaps = function (_React$Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setOptions(nextProps.lat, nextProps.lng, nextProps.zoom);
-
-      console.log(nextProps.lat);
     }
   }, {
     key: 'componentDidMount',
@@ -22781,8 +22793,6 @@ var GoogleMaps = function (_React$Component) {
         center: { lat: lat, lng: lng },
         zoom: zoom
       };
-      console.log(mapOptions);
-
       this.map.setOptions(mapOptions);
     }
   }, {
