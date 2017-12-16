@@ -10147,7 +10147,7 @@ var App = function (_React$Component) {
       lng: 19.023,
       zoom: 15,
       cities: 'Złote Łany',
-      direction: 'null'
+      direction: ''
     };
     _this._handleFormSubmit = _this._handleFormSubmit.bind(_this);
     return _this;
@@ -10159,11 +10159,15 @@ var App = function (_React$Component) {
     key: '_handleFormSubmit',
     value: function _handleFormSubmit(e) {
       e.preventDefault();
-      if (this._lat.value.length > 0) this.setState({ lat: parseFloat(this._lat.value) });
-      if (this._lng.value.length > 0) this.setState({ lng: parseFloat(this._lng.value) });
-      if (this._zoom.value.length > 0) this.setState({ zoom: parseInt(this._zoom.value) });
-      var geocoder = new google.maps.Geocoder();
-      this.geocodeLatLng(geocoder, parseInt(this._lng.value), parseInt(this._lat.value));
+      if (this._direction.value.length != 0) {
+        this.setState({ direction: this._direction.value });
+      } else {
+        if (this._lat.value.length > 0) this.setState({ lat: parseFloat(this._lat.value) });
+        if (this._lng.value.length > 0) this.setState({ lng: parseFloat(this._lng.value) });
+        if (this._zoom.value.length > 0) this.setState({ zoom: parseInt(this._zoom.value) });
+        var geocoder = new google.maps.Geocoder();
+        this.geocodeLatLng(geocoder, parseInt(this._lng.value), parseInt(this._lat.value));
+      }
     }
   }, {
     key: 'render',

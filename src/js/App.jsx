@@ -13,7 +13,7 @@ class App extends React.Component {
       lng: 19.023,
       zoom: 15,
       cities:'Złote Łany',
-      direction:'null'
+      direction:''
     }
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
@@ -22,14 +22,20 @@ class App extends React.Component {
 
   _handleFormSubmit(e) {
     e.preventDefault();
-    if (this._lat.value.length > 0)
-      this.setState({ lat: parseFloat(this._lat.value) });
-    if (this._lng.value.length > 0)
-      this.setState({ lng: parseFloat(this._lng.value) });
-    if (this._zoom.value.length > 0)
-      this.setState({ zoom: parseInt(this._zoom.value) });
-    var geocoder = new google.maps.Geocoder;
-    this.geocodeLatLng(geocoder, parseInt(this._lng.value), parseInt(this._lat.value));
+    if (this._direction.value.length != 0){
+      this.setState({ direction: this._direction.value });
+    }
+
+    else {
+      if (this._lat.value.length > 0)
+        this.setState({ lat: parseFloat(this._lat.value) });
+      if (this._lng.value.length > 0)
+        this.setState({ lng: parseFloat(this._lng.value) });
+      if (this._zoom.value.length > 0)
+        this.setState({ zoom: parseInt(this._zoom.value) });
+      var geocoder = new google.maps.Geocoder;
+      this.geocodeLatLng(geocoder, parseInt(this._lng.value), parseInt(this._lat.value));
+    }
   }
   geocodeLatLng=(geocoder, lng, lat)=>{
     var latlng = {lat, lng};
